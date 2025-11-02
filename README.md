@@ -1,149 +1,155 @@
-📌 Overview
-This project demonstrates the power of system messages by creating multiple AI personas that share the same model but behave differently.
-Each persona maintains its own conversation history and response style, showing how behavior can change using carefully crafted prompts.
-🎯 Objectives
+# 🎭 Multi-Persona AI Chat System
 
+## 📌 Overview  
+This project demonstrates the power of **system messages** by creating multiple AI personas that share the same model but behave differently.  
+Each persona has its own memory and personality, showing how prompt design can drastically change behavior.
 
-Implement 5+ distinct AI personas with unique behavior
+## 🎯 Objectives  
 
+| Feature | Description |
+|---|---|
+| ✅ 5+ distinct AI personas | Unique tones + behavior |
+| ✅ Individual system prompts | Each persona has rules + style |
+| ✅ Separate memory per persona | No history mixing |
+| ✅ Persona switching | Preserve history per persona |
+| ✅ Response streaming | Token-by-token output |
+| ✅ Compare personas | Multi-persona answer to same prompt |
+| ✅ Conversation export | Save chat logs |
+| ✅ Token usage tracking | Count per-persona tokens |
 
-Each persona has its own system prompt & memory
+---
 
+## 🤖 Personas Implemented
 
-Support persona switching with preserved history
+| Persona | Behavior |
+|---|---|
+| **Python Tutor** | Patient teacher, step-by-step, examples |
+| **Shakespearean Translator** | Classic Shakespearean tone & grammar |
+| **Socratic Teacher** | Responds only with questions |
+| **ELI5 Explainer** | Simplifies concepts like talking to a child |
+| **Technical Writer** | Structured, precise, bullet-based |
+| *(Optional)* Motivational Coach | Encouraging, emotional support |
 
+Each persona has a **system prompt** defining:
 
-Stream responses token-by-token
+- Tone & communication style  
+- Rules of behavior  
+- Memory scope  
+- Optional examples
 
+---
 
-Compare personas on the same question
+## 🧠 Design Decisions
 
+### ✅ System Messages for Persona Control  
+Guarantees consistent personality & rules across the entire conversation.
 
-Reset & export conversations
+### ✅ Separate Conversation History  
+Simulates independent minds — each persona remembers only its own dialogs.
 
+### ✅ Streaming Responses  
+Natural chat feel, incremental text like real model generation.
 
-Count tokens used per chat
+### ✅ Comparison Mode  
+Ask one question → see varied reasoning styles instantly.
 
+---
 
+## 🧩 Supported Commands
 
-🤖 Personas Implemented
-PersonaBehaviorPython TutorPatient teacher, step-by-step explanations + examplesShakespearean TranslatorConverts modern English to Shakespeare styleSocratic TeacherAnswers with questions to spark critical thinkingELI5 ExplainerExplains concepts in the simplest way possibleTechnical WriterPrecise, structured, bullet-formatted answers(Optional) Motivational CoachEncouraging and emotional support tone
-Each persona has a custom “system_message” defining:
+| Command | Purpose |
+|---|---|
+| `/switch <persona>` | Change active persona |
+| `/reset` | Reset only current persona memory |
+| `/compare p1 p2 p3 <prompt>` | Ask same question to multiple personas |
+| `/export` | Save conversation transcript |
+| `/tokens` | Display token usage stats |
 
+---
 
-Tone
+## 💬 Example Dialogs
 
-
-Response style
-
-
-Rules
-
-
-Optional examples
-
-
-
-🧠 Design Decisions
-✅ Why system messages?
-System messages enforce persona behavior consistently and persist across the conversation.
-✅ Why separate histories?
-To simulate independent personalities and memory, each persona keeps a separate chat history.
-✅ Streaming responses
-Streaming creates more natural chatbot feel and shows incremental thinking.
-✅ Comparison mode
-Lets you send the same user prompt to multiple personas to see different reasoning styles.
-
-🧩 Conversation Features
-FeatureDescription/switch <persona>Switch persona & keep history/resetReset current persona memory/compare p1 p2 p3Ask same question to multiple personas/exportSave history to fileToken CountTracks tokens per persona
-
-📚 Example Conversations
-Python Tutor — 5 Turns
+### Python Tutor — 5 Turns
+```
 User: What is a function in Python?
 Tutor: A function is a reusable block of code…
-User: Show me an example
+User: Show example
 Tutor:
 def greet(name):
     print("Hello", name)
-
 User: Why use functions?
-Tutor: To organize code, re-use logic…
+Tutor: To reuse logic & organize code…
 User: Explain with analogy
-Tutor: Think of a function like a lunchbox…
+Tutor: Like a lunchbox… pack once and reuse!
+```
 
-Shakespearean Persona — 5 Turns
+### Shakespearean Persona — 3 Snippets
+```
 User: I feel tired
-Shakespeare: Mine spirit droops with weary sorrow…
-User: Translate "You're amazing"
-Shakespeare: Thou art a marvel most divine…
-User: Ask me how my day was
-Shakespeare: Pray, how hath thy day unfolded?
+Bot: Mine spirit droops with weary sorrow…
 
-Socratic Teacher — 5 Turns
+User: Translate “You're amazing”
+Bot: Thou art a marvel most divine…
+```
+
+### Socratic Teacher
+```
 User: What is AI?
-Socratic: What do you think intelligence means?
-User: Learning and thinking
-Socratic: And what separates machine learning from human thought?
-User: Data vs experience
-Socratic: So is AI truly thinking — or mimicking patterns?
+Bot: What do *you* believe intelligence means?
+```
 
-ELI5 Explainer — 5 Turns
+### ELI5 Explainer
+```
 User: Explain blockchain
-ELI5: Imagine a notebook everyone can see…
-User: Why safe?
-ELI5: Because no one can erase a page…
+Bot: Imagine a notebook everyone shares…
+```
 
-Technical Writer — 5 Turns
-User: What is an API?
-Tech Writer:
+### Technical Writer
+```
+- Communication interface
+- Defined request/response contract
+- Example: REST using JSON
+```
 
+---
 
-Interface allowing systems to communicate
+## 🆚 Persona Comparison Example
+**Prompt:** "Explain recursion"
 
+| Persona | Response Style |
+|---|---|
+| Python Tutor | “Recursion is when a function calls itself…” |
+| Socratic | “What happens if a function repeats itself forever?” |
+| ELI5 | “Two mirrors facing each other — reflections forever!” |
 
-Standard request/response format
+---
 
+## 🧠 State Management
 
-Example: REST/JSON
+- Each persona has its own message list
+- System prompt always index `0`
+- Switching does **not** erase memory
+- Reset wipes only persona’s history
 
+---
 
+## ⚙️ Challenges & Solutions
 
-🆚 Comparison Example
-Prompt: “Explain recursion”
-Python Tutor
-“Recursion occurs when a function calls itself… Example: Fibonacci…”
-Socratic Teacher
-“What happens if a function repeats its steps? And what stops it from repeating forever?”
-ELI5 Explainer
-“Imagine two mirrors facing each other — reflections forever!”
+| Challenge | Fix |
+|---|---|
+Personas sounded similar | Strengthened prompt rules |
+Memory bleed | Dedicated storage per persona |
+Streaming issues | Token streaming loop |
+Comparing personas | Parallel calls + labels |
 
-🧠 Conversation State Management
+---
 
+## ✅ Conclusion  
+This project shows the impact of **prompt engineering + memory control**, enabling intelligent AI “characters” with consistent:
 
-Each persona has isolated history list
+- Tone  
+- Logic  
+- Behavior  
+- Memory  
 
-
-System message inserted at index 0
-
-
-Switching persona does not erase memory
-
-
-Reset clears and reloads only system prompt
-
-
-
-⚙️ Challenges & Solutions
-ChallengeSolutionPersonas sounded similarStrengthened system prompts & constraintsMemory bleed across personasSeparate memory object per personaStreaming issuesUsed token streaming loopComparing personasParallel calls + labeled output
-
-✅ Conclusion
-This project highlights how AI personality and behavior can be engineered using:
-
-
-System prompts
-
-
-Conversation memory
-
-
-Controlled chat flow
+It demonstrates how to build **real multi-persona systems**, useful for tutoring apps, language companions, role-play chatbots, and educational platforms.
